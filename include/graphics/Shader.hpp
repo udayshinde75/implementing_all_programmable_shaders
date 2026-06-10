@@ -11,7 +11,7 @@ class Shader
         mutable std::unordered_map<std::string, GLint> UniformCache;
 
     public:
-        Shader(const std::string& vertexSource, const std::string& fragmentSource);
+        Shader(const std::string& _vertexSource, const std::string& _fragmentSource);
         ~Shader();
 
         void Use() const;
@@ -23,8 +23,8 @@ class Shader
         void SetVec3(const std::string& name, float x, float y, float z) const;
         void SetMat4(const std::string& name, const float* matrix) const;
 
-        private: //helpers
-        std::string& ReadFile(const std::string& filepath);
+    private: //helpers
+        std::string ReadFile(const std::string& filepath);
         GLuint CompileShader(GLenum type, const std::string& source);
         void CheckCompileErrors(GLuint object, const std::string& type);
         GLint GetUniformLocation(const std::string& name) const;

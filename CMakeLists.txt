@@ -12,6 +12,7 @@ add_executable(
     OpenGLShader
     src/main.cpp
     external/glad/src/glad.c
+    src/graphics/Shader.cpp
 )
 
 target_include_directories(OpenGLShader PRIVATE
