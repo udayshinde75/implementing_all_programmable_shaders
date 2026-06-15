@@ -4,15 +4,19 @@
 #include <iostream>
 
 // Constructor
-Shader::Shader(const std::string& _vertexSource, const std::string& _fragmentSource)
+Shader::Shader(const std::string& _vertexSource, const std::string& _fragmentSource, const std::string& _tessControlSource, const std::string& _tessEvaluationSource)
 {
     // Read Shader files
     std::string vertexSource = ReadFile(_vertexSource);
     std::string fragmentSource = ReadFile(_fragmentSource);
+    std::string tessControlSource = ReadFile(_tessControlSource);
+    std::string tessEvaluationSource = ReadFile(_tessEvaluationSource);
 
     // Compile shaders
     GLuint vertexShader = CompileShader(GL_VERTEX_SHADER, vertexSource);
     GLuint fragmentShader = CompileShader(GL_FRAGMENT_SHADER, fragmentSource);
+    GLuint tessControlShader = CompileShader(GL_TESS_CONTROL_SHADER, tessControlSource);
+    GLuint tessEvaluationShader = CompileShader(GL_TESS_EVALUATION_SHADER, tessEvaluationSource);
 
     // Create shader program
     programID = glCreateProgram();
@@ -20,6 +24,8 @@ Shader::Shader(const std::string& _vertexSource, const std::string& _fragmentSou
     // Attach Shaders
     glAttachShader(programID, vertexShader);
     glAttachShader(programID, fragmentShader);
+    glAttachShader(programID, tessControlShader);
+    glAttachShader(programID, tessEvaluationShader);
 
     // Link programs
     glLinkProgram(programID);
@@ -30,6 +36,8 @@ Shader::Shader(const std::string& _vertexSource, const std::string& _fragmentSou
     // Delete Shaders
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+    glDeleteShader(tessControlShader);
+    glDeleteShader(tessEvaluationShader);
 }
 Shader::~Shader()
 {

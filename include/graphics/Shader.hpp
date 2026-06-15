@@ -11,7 +11,7 @@ class Shader
         mutable std::unordered_map<std::string, GLint> UniformCache;
 
     public:
-        Shader(const std::string& _vertexSource, const std::string& _fragmentSource);
+        Shader(const std::string& _vertexSource, const std::string& _fragmentSource, const std::string& _tessControlSource, const std::string& _tessEvaluationSource);
         ~Shader();
 
         void Use() const;

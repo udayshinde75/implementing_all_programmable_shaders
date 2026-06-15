@@ -64,7 +64,9 @@ int main(void)
 
     Shader shader(
         "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/vertexShaderSource.glsl",
-        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/fragmentShaderSource.glsl"
+        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/fragmentShaderSource.glsl",
+        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/tessellationControlShaderSource.glsl",
+        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/tessellationEvaluationShaderSource.glsl"
     );
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -83,11 +85,12 @@ int main(void)
         shader.Use();
         glBindVertexArray(VAO);
 
-        GLfloat attrib[] = {(float)sin(time) * 0.5f + 0.5f, (float)cos(time) * 0.5f + 0.5f, 0.0f, 0.0f};
+        //GLfloat attrib[] = {(float)sin(time) * 0.5f + 0.5f, (float)cos(time) * 0.5f + 0.5f, 0.0f, 0.0f};
 
-        glVertexAttrib4fv(2, attrib);
+        glVertexAttrib1f(2, time);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glPatchParameteri(GL_PATCH_VERTICES, 3);
+        glDrawArrays(GL_PATCHES, 0, 3); 
 
         glfwSwapBuffers(window);
         glfwPollEvents();

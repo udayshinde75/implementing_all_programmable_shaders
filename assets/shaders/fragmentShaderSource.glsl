@@ -1,7 +1,7 @@
 #version 410 core
 out vec4 FragColor;
 
-in VS_OUT
+in TES_OUT
 {
     vec3 color;
 } fs_in;
