@@ -39,9 +39,9 @@ int main(void)
     }
 
     int fbWidth, fbHeight;
-    std::cout << "Width : " << fbWidth << ", Height : " << fbHeight << "\n";
     glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
     glViewport(0, 0, fbWidth, fbHeight);
+    std::cout << "Width : " << fbWidth << ", Height : " << fbHeight << "\n";
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -67,14 +67,25 @@ int main(void)
         "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/fragmentShaderSource.glsl"
     );
 
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     while (!glfwWindowShouldClose(window))
     {
         process_input(window);
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //glClear(GL_COLOR_BUFFER_BIT);
+
+        float time = glfwGetTime();
+        GLfloat red[] = {(float)sin(time) * 0.5f + 0.5f, (float)cos(time) * 0.5f + 0.5f, 0.0f, 1.0f};
+
+        glClearBufferfv(GL_COLOR, 0, red);
 
         shader.Use();
         glBindVertexArray(VAO);
+
+        GLfloat attrib[] = {(float)sin(time) * 0.5f + 0.5f, (float)cos(time) * 0.5f + 0.5f, 0.0f, 0.0f};
+
+        glVertexAttrib4fv(2, attrib);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
