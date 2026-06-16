@@ -1,9 +1,10 @@
 #version 410 core
 out vec4 FragColor;
 
-in TES_OUT
+in GS_OUT
 {
     vec3 color;
+    float time;
 } fs_in;
 
 void main()

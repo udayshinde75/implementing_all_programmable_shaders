@@ -4,28 +4,31 @@
 #include <iostream>
 
 // Constructor
-Shader::Shader(const std::string& _vertexSource, const std::string& _fragmentSource, const std::string& _tessControlSource, const std::string& _tessEvaluationSource)
+Shader::Shader(const std::string& _vertexSource, const std::string& _fragmentSource, const std::string& _tessControlSource, const std::string& _tessEvaluationSource, const std::string& _geometryShaderSource)
 {
     // Read Shader files
     std::string vertexSource = ReadFile(_vertexSource);
     std::string fragmentSource = ReadFile(_fragmentSource);
     std::string tessControlSource = ReadFile(_tessControlSource);
     std::string tessEvaluationSource = ReadFile(_tessEvaluationSource);
+    std::string geometrySource = ReadFile(_geometryShaderSource);
 
     // Compile shaders
     GLuint vertexShader = CompileShader(GL_VERTEX_SHADER, vertexSource);
     GLuint fragmentShader = CompileShader(GL_FRAGMENT_SHADER, fragmentSource);
     GLuint tessControlShader = CompileShader(GL_TESS_CONTROL_SHADER, tessControlSource);
     GLuint tessEvaluationShader = CompileShader(GL_TESS_EVALUATION_SHADER, tessEvaluationSource);
+    GLuint geometryShader = CompileShader(GL_GEOMETRY_SHADER, geometrySource);
 
     // Create shader program
     programID = glCreateProgram();
 
     // Attach Shaders
     glAttachShader(programID, vertexShader);
-    glAttachShader(programID, fragmentShader);
     glAttachShader(programID, tessControlShader);
     glAttachShader(programID, tessEvaluationShader);
+    glAttachShader(programID, geometryShader);
+    glAttachShader(programID, fragmentShader);
 
     // Link programs
     glLinkProgram(programID);

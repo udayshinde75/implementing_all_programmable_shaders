@@ -66,10 +66,13 @@ int main(void)
         "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/vertexShaderSource.glsl",
         "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/fragmentShaderSource.glsl",
         "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/tessellationControlShaderSource.glsl",
-        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/tessellationEvaluationShaderSource.glsl"
+        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/tessellationEvaluationShaderSource.glsl",
+        "/Users/udayshinde/Desktop/OpenGLProjects/implementing_all_programmable_shaders/assets/shaders/geometryShaderSource.glsl"
     );
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glPointSize(5.0);
 
     while (!glfwWindowShouldClose(window))
     {
